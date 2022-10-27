@@ -1,0 +1,27 @@
+  <launch>
+  <!-- FLEXX TIME OF LIGHT  -->
+  <arg name="flexx_node1_name"          default=""/>
+  <arg name="flexx_node2_name"          default=""/>
+  <!-- cameras -->
+  <arg name="device_type_camera2"    		default="d455"/>		<!-- Note: using regular expression. match D435, D435i, D415... -->
+  <arg name="camera2"              			default="d400"/>
+  <arg name="tf_prefix_camera2"         default="$(arg camera2)"/>
+  <arg name="initial_reset"             default="false"/>
+  <arg name="topic_odom_in"             default="odom_in"/>
+  <arg name="serial_no_camera2"    			default="035122250716"/>
+  <arg name="clip_distance_front"       default="6"/>
+  <arg name="calib_odom_file"           default=""/>
+ 
+  <group ns="$(arg camera2)">
+    <include file="$(find image_processing)/launch/includes/nodelet.launch.xml">
+      <arg name="device_type"           value="$(arg device_type_camera2)"/>
+      <arg name="serial_no"             value="$(arg serial_no_camera2)"/>
+      <arg name="tf_prefix"		          value="$(arg tf_prefix_camera2)"/>
+      <arg name="initial_reset"         value="$(arg initial_reset)"/>
+      <arg name="clip_distance"   value="$(arg clip_distance_front)"/>
+      <arg name="json_file_path"      value="/home/xavier/turret_ws/src/image_processing/cfg/config.json"/>
+      <arg name="infra_rgb"           value="false"/>
+    </include>
+  </group>
+
+    </launch>
